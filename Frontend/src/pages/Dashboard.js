@@ -1,31 +1,21 @@
-
 import { Form, json, redirect, useLoaderData } from 'react-router-dom';
-import { Card, Button, Container} from 'react-bootstrap/';
+import { Card, Button} from 'react-bootstrap/';
 import ToDoList from '../components/ToDoList';
-import classes from './Dashboard.module.css'
 
 function Dashboard() {
+  
   const data = useLoaderData();
   return (
-    <Container>
-    <Card className="text-center" style={{ width: '21rem' }} centered>
+    <Card className="text-center" style={{ width: '21rem' }}>
       <Card.Header>To DO List</Card.Header>
       <Card.Body>
         <Form method='post'>
           <input name='todo' type='text' id='todo' placeholder='Enter To Do Item'/>
-          <button><Button>Add</Button></button>
+          <Button type="submit">Add</Button>
         </Form>
       </Card.Body>
       <Card.Footer className="text-muted"><ToDoList todolist={data} /></Card.Footer>
     </Card>
-    </Container>
-    // <Container className={classes.form}>
-    //   <Form method='post'>
-    //     <input name='todo' type='text' id='todo' placeholder='Enter To Do Item'/>
-    //     <button>Add</button>
-    //   </Form>
-    //   <ToDoList todolist={data} />
-    // </Container>
   )
 }
 

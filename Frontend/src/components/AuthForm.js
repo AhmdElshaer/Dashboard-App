@@ -1,5 +1,5 @@
 import { Form, Link, useActionData, useNavigation, useSearchParams } from 'react-router-dom';
-import classes from './AuthForm.module.css';
+import { Button } from 'react-bootstrap';
 
 function AuthForm() {
   const data = useActionData();
@@ -12,7 +12,7 @@ function AuthForm() {
 
   return (
     <>
-      <Form method="post" className={classes.form}>
+      <Form method="post" style={{maxWidth: "40rem", margin: '2rem auto' }}>
         <h1>{isLogin ? 'Log in' : 'Create a new user'}</h1>
         {data && data.errors && (<ul>
           {Object.values(data.errors).map((err) => (
@@ -21,18 +21,18 @@ function AuthForm() {
           </ul>)}
           {data && data.message && <p>{data.message}</p>}
         <p>
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" required />
+          <label className='d-block w-100' htmlFor="email">Email</label>
+          <input className='d-block w-100 p-2' id="email" type="email" name="email" required />
         </p>
         <p>
-          <label htmlFor="image">Password</label>
-          <input id="password" type="password" name="password" required />
+          <label className='d-block w-100' htmlFor="image">Password</label>
+          <input className='d-block w-100 p-2' id="password" type="password" name="password" required />
         </p>
-        <div className={classes.actions}>
+        <div className='d-flex gap-2 justify-content-end align-items-center'>
           <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
             {isLogin ? 'Create new user' : 'Login'}
           </Link>
-          <button disabled={isSubmitting}>{isSubmitting ? 'Is Submitting' : 'Save'}</button>
+          <Button type='submit' disabled={isSubmitting}>{isSubmitting ? 'Is Submitting' : 'Save'}</Button>
         </div>
       </Form>
     </>

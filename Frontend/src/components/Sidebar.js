@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom";
-import classes from './Sidebar.module.css'
 
 function Sidebar () {
   return (
-    <aside className={classes.sidebar}>
-      <ul className={classes.list}>
+    <aside className='p-4'>
+      <ul className='mt-5 gap-4 d-flex flex-column'>
         <li>
           <NavLink to='dashboard'>Dashboard</NavLink>
         </li>
