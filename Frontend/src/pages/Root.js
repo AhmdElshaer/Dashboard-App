@@ -3,20 +3,20 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import {Container} from 'react-bootstrap/';
 import { useContext } from "react";
-import Context from "../components/Context";
+import { ThemeContext } from "../Context/Context";
 
 function RootLayout() {
-  const modeDark = useContext(Context);
-  console.log(`is the mode dark? ${modeDark.Dark}`);
+  const { toggle } = useContext(ThemeContext);
+  document.getElementById('root').classList = `${toggle ? 'bg-dark' : 'bg-light'}`;
 
   return (
-    <Container className={modeDark.Dark ? 'bg-dark' : 'bg-light'}>
+    <Container style={{ minHeight: '100vh'}}>
       <header>
         <Header />
       </header>
         <main className="d-flex justify-content-start m-auto">
         <Sidebar />
-        <Container className={`d-flex align-items-center justify-content-center ${modeDark.Dark ? 'bg-dark' : 'bg-light'}`}>
+        <Container className={`d-flex align-items-center justify-content-center ${toggle ? 'bg-dark' : 'bg-light'}`}>
           <Outlet />
           </Container>
         </main>

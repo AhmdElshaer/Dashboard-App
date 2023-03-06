@@ -5,6 +5,7 @@ import ToDoList from '../components/ToDoList';
 function Dashboard() {
   
   const data = useLoaderData();
+
   return (
     <Card className="text-center" style={{ width: '21rem' }}>
       <Card.Header>To DO List</Card.Header>
@@ -18,6 +19,7 @@ function Dashboard() {
     </Card>
   )
 }
+
 
 export default Dashboard;
 

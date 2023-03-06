@@ -5,21 +5,27 @@ import RootLayout from './pages/Root';
 import Settings from './pages/Settings';
 import LoggIn, {action as authAction} from './pages/Authentication';
 import {action as logoutAction} from './pages/Logout';
-import { tokenLoader } from './util/auth';
+import { checkAuthLoader, tokenLoader } from './util/auth';
 import ErrorPage from './pages/Error';
+import { ThemeProvider } from './Context/Context';
+import Signup from './pages/Signup';
 
 const router = createBrowserRouter([
   {path: '/', element: <RootLayout />, id: 'root', loader: tokenLoader, children : [
-    {path: 'dashboard', element: <Dashboard />, errorElement: <ErrorPage/>, action: toDoAction, loader: todoLoader},
-    {path: 'settings', element: <Settings />},
+    {index: true, element: <Dashboard />, errorElement: <ErrorPage/>, action: toDoAction, loader: todoLoader},
+    {path: 'settings', id: 'settings', element: <Settings />, loader: checkAuthLoader},
     {path: 'auth', element: <LoggIn />, action: authAction},
+    {path: 'auth', element: <Signup />, action: authAction},
     {path: 'logout', action: logoutAction}
-  ]}
+  ]
+}
 ])
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <ThemeProvider >
+      <RouterProvider router={router} />
+      </ThemeProvider>
   );
 }
 

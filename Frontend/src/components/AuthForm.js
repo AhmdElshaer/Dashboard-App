@@ -1,9 +1,11 @@
 import { Form, Link, useActionData, useNavigation, useSearchParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { getAuthToken } from '../util/auth';
 
 function AuthForm() {
   const data = useActionData();
   const navigation = useNavigation();
+  const token = getAuthToken();
 
   const [searchParams] = useSearchParams();
   const isLogin = searchParams.get('mode') === 'login';
@@ -12,7 +14,8 @@ function AuthForm() {
 
   return (
     <>
-      <Form method="post" style={{maxWidth: "40rem", margin: '2rem auto' }}>
+      {token && <h1>You are Already logged in</h1>}
+      {!token && <Form method="post" style={{maxWidth: "40rem", margin: '2rem auto' }}>
         <h1>{isLogin ? 'Log in' : 'Create a new user'}</h1>
         {data && data.errors && (<ul>
           {Object.values(data.errors).map((err) => (
@@ -34,7 +37,7 @@ function AuthForm() {
           </Link>
           <Button type='submit' disabled={isSubmitting}>{isSubmitting ? 'Is Submitting' : 'Save'}</Button>
         </div>
-      </Form>
+      </Form>}
     </>
   );
 }

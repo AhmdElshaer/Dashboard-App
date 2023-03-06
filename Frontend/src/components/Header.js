@@ -27,7 +27,6 @@ function Header () {
               </Form>
             </li>}
           </ul>
-      {/* <Button ><NavLink to={'login'}>Log In</NavLink></Button> */}
     </header>
   )
 }
