@@ -1,22 +1,21 @@
 import { json, redirect } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
 import { getAuthToken } from "../util/auth";
+import TodoItem from "./TodoItem";
 
-function ToDoList({todolist}) {
+function ToDoList(props) {
+  const { todolist } = props;
 
   return (
     <div style={{'textAlign': 'center'}}>
-      {!todolist && <h1>Write some to do list</h1>}
+      {todolist.length === 0 && <h3>Write some to do list</h3>}
       {todolist && <ul>
-        {todolist.map((todoItem) => (<li key={todoItem.key}>
-          <Card border="primary" style={{ width: '18rem', marginTop: '1rem' }}>
-          <Card.Body><Card.Title className="d-flex justify-content-center align-items-center gap-2">
-          <input type="checkbox" key={todoItem.key} value={todoItem.title}/>
-          <p className='m-0'>{todoItem.title}</p>
-        </Card.Title>
-        </Card.Body>
-      </Card>
-        </li>))}
+        {todolist.map((todoItem) => (<TodoItem 
+          key={todoItem.id}
+          todoItem={{
+            id: todoItem.id,
+            title: todoItem.title
+          }}
+          />))}
         </ul>}
     </div>
   )
@@ -44,5 +43,4 @@ export async function loader({ request, params }) {
     }
   return todolist;
 }
-
 };

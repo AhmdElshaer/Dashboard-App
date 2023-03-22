@@ -1,11 +1,14 @@
 import { useRouteLoaderData } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../Context/Context";
 
 function Sidebar () {
     const token = useRouteLoaderData('root');
+    const { toggle } = useContext(ThemeContext);
 
   return (
-    <aside className='p-4'>
+    <aside className='sidebar px-4' style={toggle ? {backgroundColor: 'var(--dark-color)'} : {backgroundColor: 'var(--light-color)'}}>
       <ul className='mt-5 gap-4 d-flex flex-column'>
         <li>
           {token && <NavLink to='/'>Dashboard</NavLink>}

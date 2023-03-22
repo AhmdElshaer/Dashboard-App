@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Dashboard, {action as toDoAction } from './pages/Dashboard';
-import {loader as todoLoader} from './components/ToDoList';
+// import { loader as todoLoader } from './components/ToDoList';
 import RootLayout from './pages/Root';
 import Settings from './pages/Settings';
 import LoggIn, {action as authAction} from './pages/Authentication';
@@ -12,7 +12,7 @@ import Signup from './pages/Signup';
 
 const router = createBrowserRouter([
   {path: '/', element: <RootLayout />, id: 'root', loader: tokenLoader, children : [
-    {index: true, element: <Dashboard />, errorElement: <ErrorPage/>, action: toDoAction, loader: todoLoader},
+    {index: true, element: <Dashboard />, errorElement: <ErrorPage/>},
     {path: 'settings', id: 'settings', element: <Settings />, loader: checkAuthLoader},
     {path: 'auth', element: <LoggIn />, action: authAction},
     {path: 'auth', element: <Signup />, action: authAction},

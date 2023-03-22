@@ -23,6 +23,12 @@ function AuthForm() {
           ))}
           </ul>)}
           {data && data.message && <p>{data.message}</p>}
+          {!isLogin &&
+          <p>
+          <label className='d-block w-100' htmlFor="username">User Name</label>
+          <input className='d-block w-100 p-2' id="username" type="text" name="username" required />
+        </p>
+        }
         <p>
           <label className='d-block w-100' htmlFor="email">Email</label>
           <input className='d-block w-100 p-2' id="email" type="email" name="email" required />

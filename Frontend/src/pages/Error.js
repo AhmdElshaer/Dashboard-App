@@ -1,6 +1,4 @@
 import { useRouteError } from 'react-router-dom';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
 
 function ErrorPage() {
   const error = useRouteError();
@@ -19,8 +17,6 @@ function ErrorPage() {
 
   return (
     <>
-      <Header />
-      <Sidebar />
         <p>{message}</p>
     </>
   );
