@@ -15,6 +15,9 @@ function Sidebar () {
           {!token && <NavLink to='/auth?mode=login'>Dashboard</NavLink>}
         </li>
         <li>
+          <NavLink to='dataEntry'>Data Entry</NavLink>
+        </li>
+        <li>
           <NavLink to='settings'>Settings</NavLink>
         </li>
       </ul>
