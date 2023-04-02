@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Form, json, redirect } from 'react-router-dom';
 
 function DataEntry() {
-  const [inputCategory, setInputCategory] = useState('');
+  const [inputCategory, setInputCategory] = useState('Dialysis');
   const [inputId, setInputId] = useState("");
   const [inputTitle, setInputTitle] = useState('');
   const [inputDescription, setInputDescription] = useState('');
@@ -12,7 +12,7 @@ function DataEntry() {
   const [inputImage3, setInputImage3] = useState('');
 
   const notComplete = inputId.trim().length === 0 || inputTitle.trim().length === 0 || inputDescription.trim().length === 0 || inputImage1.trim().length === 0;
-  console.log(notComplete);
+
   const submitHandler = async (event) => {
     event.preventDefault();
     const newItem = {
@@ -24,7 +24,6 @@ function DataEntry() {
       image2: inputImage2,
       image3: inputImage3,
     };
-    console.log(newItem);
     const response = await fetch('https://reacthttp-50bcb-default-rtdb.firebaseio.com/data.json', {
     method: 'POST',
     body: JSON.stringify(newItem)
@@ -32,7 +31,6 @@ function DataEntry() {
   if (!response.ok) {
     throw json({ message: 'Could not save .' }, { status: 500 });
   }
-  setInputCategory('');
   setInputDescription('');
   setInputId('');
   setInputTitle('');
@@ -44,8 +42,8 @@ function DataEntry() {
   return (
     <form className='container mt-5' style={{width: '70%'}} onSubmit={submitHandler}>
       <select className="form-select mb-3" onChange={(event)=> setInputCategory(event.target.value)}>
-      <option value='Dialysis'>Dialysis</option>
-      <option value='Syrgical'>Surgical</option>
+      <option value='Dialysis' defaultValue='Dialysis'>Dialysis</option>
+      <option value='Surgical'>Surgical</option>
       <option value='Labs'>Labs and Researches</option>
       <option value='Dental'>Dental</option>
       <option value='Cosmatics'>Cosmatics</option>
@@ -74,6 +72,7 @@ function DataEntry() {
       <label className='d-block' htmlFor='image3'>Image3</label>
       <input id='image3' type="text" name="image3" style={{width: '100%'}} value={inputImage3} onChange={(event)=> setInputImage3(event.target.value)}/>
     </p>
+    {notComplete && <p>Please Complete the data to enable submit</p>}
     <Button type='submit' disabled={notComplete}>Submit</Button>
     </form>
   )
